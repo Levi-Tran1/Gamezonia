@@ -55,3 +55,9 @@ body {
     background: url('img/gay.png') no-repeat center center fixed;
     background-size: cover;
 }
+
+btn btn-warning flex-fill {
+    background-color: #ffcc00fb;
+    border-color: #785320;
+    color: #000;
+}
