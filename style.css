@@ -1,0 +1,57 @@
+.logo img {
+  height: 60px;
+  /* Tăng kích thước logo */
+}
+
+.navbar-nav .nav-link {
+  margin-right: 15px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #6f42c1 !important;
+}
+
+
+/* Giảm kích thước card */
+.card {
+  max-height: 800px;
+  max-width: 300px;
+  margin: auto;
+}
+
+
+
+/* Tùy chỉnh tiêu đề */
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Tùy chỉnh chữ mô tả */
+.card-text {
+  font-size: 0.9rem;
+}
+
+/* Carousel: cố định chiều cao và căn ảnh đều */
+.carousel-item {
+  height: 400px;
+  /* Chiều cao đồng nhất */
+  width: 100%;
+  object-fit: cover;
+  /* Cắt ảnh để vừa khung mà không méo */
+}
+/* Đặt kích thước ảnh sản phẩm vừa với card */
+.card-img-top {
+  width: 300px;        /* Chiều rộng cố định */
+  height: 450px;       /* Chiều cao cố định */
+  object-fit: cover;   /* Cắt ảnh để vừa khung mà không méo */
+  margin: 0 auto;      /* Căn giữa ảnh trong card */
+  display: block;
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}
+
+body {
+    background: url('img/gay.png') no-repeat center center fixed;
+    background-size: cover;
+}
