@@ -28,15 +28,15 @@
 
             <h4 class="text-center text-primary mb-4">Đăng nhập</h4>
 
-            <form>
+            <form id="loginForm">
                 <div class="form-group d-flex align-items-center rounded-sm mb-3">
                     <span class="icon me-2 text-primary"><i class="fa-solid fa-envelope"></i></span>
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" id="loginEmail" class="form-control" placeholder="Email" required>
                 </div>
 
                 <div class="form-group d-flex align-items-center rounded-sm mb-3">
                     <span class="icon me-2 text-primary"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" class="form-control" placeholder="Mật khẩu">
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Mật khẩu" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
@@ -50,6 +50,31 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let email = document.getElementById("loginEmail").value.trim();
+            let password = document.getElementById("loginPassword").value;
+
+            // Lấy danh sách user đã đăng ký từ LocalStorage
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Tìm user trùng khớp
+            let user = users.find(user => user.email === email && user.password === password);
+
+            if (user) {
+                // Lưu trạng thái đăng nhập
+                localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+                alert("✅ Đăng nhập thành công, chào " + user.name + "!");
+                window.location.href = "index.html"; // Chuyển về trang chủ
+            } else {
+                alert("❌ Sai email hoặc mật khẩu!");
+            }
+        });
+    </script>
 </body>
 
 </html>
