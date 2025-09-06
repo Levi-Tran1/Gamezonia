@@ -33,6 +33,14 @@
           <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-info-circle"></i> Giới Thiệu</a></li>
           <li class="nav-item"><a class="nav-link" href="products.html"><i class="bi bi-controller"></i> Sản Phẩm</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html"><i class="bi bi-envelope"></i> Liên Hệ</a></li>
+          <li class="nav-item ms-2">
+  <a class="btn btn-outline-warning btn-sm position-relative" href="cart.html">
+    <i class="bi bi-cart3"></i> Giỏ Hàng
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">
+      0
+    </span>
+  </a>
+</li>
           <!-- Khi chưa đăng nhập -->
           <li class="nav-item ms-2" id="loginNav">
             <a class="btn btn-outline-light btn-sm" href="login.html"><i class="bi bi-box-arrow-in-right"></i> Đăng Nhập</a>
@@ -279,6 +287,41 @@
         window.location.href = "index.html";
       });
     }
+// Xử lý giỏ hàng
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Gán sự kiện cho tất cả nút "Thêm giỏ"
+document.querySelectorAll(".btn-success").forEach(btn => {
+  if (btn.innerText.includes("Thêm giỏ")) {
+    btn.addEventListener("click", function () {
+      // Kiểm tra đăng nhập
+      let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+      if (!loggedInUser) {
+        alert("⚠️ Vui lòng đăng nhập trước khi thêm sản phẩm vào giỏ hàng!");
+      
+        return;
+      }
+
+      // Nếu đã đăng nhập thì thêm sản phẩm
+      let card = btn.closest(".card");
+      let name = card.querySelector("h4").innerText;
+      let price = card.querySelector(".badge.bg-success").innerText;
+      let img = card.querySelector("img").src;
+
+      cart.push({ name, price, img });
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Cập nhật số lượng trên icon giỏ hàng
+      document.getElementById("cartCount").innerText = cart.length;
+
+      alert(`${name} đã được thêm vào giỏ hàng!`);
+    });
+  }
+});
+
+// Load lại số lượng khi refresh
+document.getElementById("cartCount").innerText = cart.length;
+
   </script>
 </body>
 
